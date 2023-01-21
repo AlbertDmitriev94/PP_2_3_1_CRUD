@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserServiceImpl;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("/")
 public class UserController {
 
-    private UserServiceImpl userServiceImpl;
+    private final UserServiceImpl userServiceImpl;
 
     @Autowired
     public UserController(UserServiceImpl userServiceImpl) {
@@ -22,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/")
-    public String getUsersList(ModelMap model) {
+    public String getUsersList(Model model) {
         model.addAttribute("users", userServiceImpl.getAllUsers());
         return "/users";
     }
@@ -57,10 +55,4 @@ public class UserController {
         userServiceImpl.deleteUserById(id);
         return "redirect:/";
     }
-//	@GetMapping(value = "/add")
-//    public String addUsers(ModelMap model) {
-//        model.addAttribute(@ModelAttribute("users") User user));
-//        return "";
-//	}
-
 }
