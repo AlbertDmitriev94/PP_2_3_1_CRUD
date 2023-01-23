@@ -46,12 +46,8 @@ public class AppConfig implements WebMvcConfigurer {
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setPrefix("/WEB-INF/pages/");
         templateResolver.setSuffix(".html");
+        templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
-    }
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/styles/css/**")
-                .addResourceLocations("classpath:/css/");
     }
 
     @Bean
@@ -66,6 +62,9 @@ public class AppConfig implements WebMvcConfigurer {
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+        resolver.setTemplateEngine(templateEngine());
+        resolver.setCharacterEncoding("UTF-8");
+        resolver.setContentType("text/html; charset=UTF-8");
         resolver.setTemplateEngine(templateEngine());
         registry.viewResolver(resolver);
     }
@@ -83,16 +82,19 @@ public class AppConfig implements WebMvcConfigurer {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(getDataSource());
-        entityManagerFactoryBean.setPackagesToScan(new String[] {"web.model"});
+        entityManagerFactoryBean.setPackagesToScan(env.getProperty("db.entity.package"));
 
-        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-        entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
+        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
+        return entityManagerFactoryBean;
+    }
 
+        private Properties getHibernateProperties () {
         Properties props = new Properties();
         props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        entityManagerFactoryBean.setJpaProperties(props);
-        return entityManagerFactoryBean;
+        props.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        return props;
     }
 
     @Bean
@@ -105,5 +107,11 @@ public class AppConfig implements WebMvcConfigurer {
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/styles/css/**")
+                .addResourceLocations("classpath:/css/");
     }
 }

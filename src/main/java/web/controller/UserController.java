@@ -1,5 +1,6 @@
 package web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,18 +12,19 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
 public class UserController {
     private final UserService userService;
+
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping("/users")
     public String index(Model model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
-        return "/index";
+        return "/users";
     }
 
     @GetMapping("/add")
