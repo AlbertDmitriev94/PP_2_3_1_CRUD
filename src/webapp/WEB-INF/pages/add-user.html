@@ -2,40 +2,40 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>New user</title>
+    <title>Новый пользователь</title>
     <link rel="stylesheet" th:href="@{/styles/css/main.css}"/>
 </head>
 <body>
 <div class="wrap">
-    <h1>New user</h1>
+    <h1>Новый пользователь</h1>
     <div class="form-wrapper">
         <form th:method="POST" th:action="@{/}" th:object="${user}">
             <div>
-                <label for="name">Name:</label>
+                <label for="name">Имя:</label>
                 <br/>
                 <input type="text" th:field="*{name}" id="name" required/>
                 <div class="error" th:if="${#fields.hasErrors('Name')}" th:errors="*{Name}"></div>
             </div>
             <div>
-                <label for="surname">Surname:</label>
+                <label for="surname">Фамилия:</label>
                 <br/>
                 <input type="text" th:field="*{surname}" id="surname" required/>
                 <div class="error" th:if="${#fields.hasErrors('Surname')}" th:errors="*{Surname}"></div>
             </div>
             <div>
-                <label for="age">Age:</label>
+                <label for="age">Возраст:</label>
                 <br/>
                 <input type="text" th:field="*{age}" id="age" required/>
                 <div class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></div>
             </div>
             <div>
-                <label for="email">Email:</label>
+                <label for="email">Почта:</label>
                 <br/>
                 <input type="text" th:field="*{email}" id="email" required/>
                 <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
-            <input type="submit" value="create"/>
-            <input type="button" value="escape" onclick="window.location.href='/'"/>
+            <input type="submit" value="Обновить"/>
+            <input type="button" value="Вернуться" onclick="window.location.href='/'"/>
         </form>
     </div>
 </div>
