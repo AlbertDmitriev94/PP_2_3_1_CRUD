@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Пользователи</title>
-    <link rel="stylesheet" th:href="@{/styles/css/main.css}"/>
 </head>
 <body>
 <div class="wrap">
-    <h1>Пользователи</h1>
+    <h1>Список пользователей</h1>
     <table>
         <tr>
             <th>ID</th>
@@ -24,10 +23,10 @@
             <td th:text="${user.getAge()}"></td>
             <td th:text="${user.getEmail()}"></td>
             <td class="buttons">
-                <form th:method="GET" th:action="@{/user_{id}/edit-user(id=${user.getId()})}">
+                <form th:method="GET" th:action="@{/edit-user/{id}(id=${user.getId()})}">
                     <input type="submit" value="Обновить"/>
                 </form>
-                <form th:method="DELETE" th:action="@{/user_{id}(id=${user.getId()})}">
+                <form th:method="DELETE" th:action="@{/edit-user/{id}(id=${user.getId()})}">
                     <input type="submit" value="Удалить"/>
                 </form>
             </td>

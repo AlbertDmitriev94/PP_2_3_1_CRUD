@@ -1,8 +1,0 @@
-web\service\UserService.class
-web\DAO\UserDaoImpl.class
-web\config\AppConfig.class
-web\config\AppInit.class
-web\controller\UserController.class
-web\service\UserServiceImpl.class
-web\DAO\UserDAO.class
-web\model\User.class

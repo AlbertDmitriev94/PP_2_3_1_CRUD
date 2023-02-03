@@ -43,13 +43,13 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/user_{id}/edit-user")
+    @GetMapping("/edit-user/{id}")
     public String edit(@PathVariable("id") Long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
         return "/edit-user";
     }
 
-    @PatchMapping("/user_{id}")
+    @PatchMapping("/edit-user/{id}")
     public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/edit-user";
@@ -58,7 +58,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/user_{id}")
+    @DeleteMapping("/edit-user/{id}")
     public String delete(@PathVariable("id") Long id) {
         userService.deleteUser(id);
         return "redirect:/";

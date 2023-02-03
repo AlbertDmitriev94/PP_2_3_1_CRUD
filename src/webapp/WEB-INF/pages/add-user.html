@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Новый пользователь</title>
-    <link rel="stylesheet" th:href="@{/styles/css/main.css}"/>
-</head>
+ </head>
 <body>
 <div class="wrap">
     <h1>Новый пользователь</h1>
@@ -14,13 +13,13 @@
                 <label for="name">Имя:</label>
                 <br/>
                 <input type="text" th:field="*{name}" id="name" required/>
-                <div class="error" th:if="${#fields.hasErrors('Name')}" th:errors="*{Name}"></div>
+                <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
             </div>
             <div>
                 <label for="surname">Фамилия:</label>
                 <br/>
                 <input type="text" th:field="*{surname}" id="surname" required/>
-                <div class="error" th:if="${#fields.hasErrors('Surname')}" th:errors="*{Surname}"></div>
+                <div class="error" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"></div>
             </div>
             <div>
                 <label for="age">Возраст:</label>
@@ -34,7 +33,7 @@
                 <input type="text" th:field="*{email}" id="email" required/>
                 <div class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
             </div>
-            <input type="submit" value="Обновить"/>
+            <input type="submit" value="Создать"/>
             <input type="button" value="Вернуться" onclick="window.location.href='/'"/>
         </form>
     </div>
