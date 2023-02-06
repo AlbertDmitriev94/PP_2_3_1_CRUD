@@ -49,7 +49,7 @@ public class UserController {
         return "/edit-user";
     }
 
-    @PatchMapping("/edit-user/{id}")
+    @PatchMapping("/edit-user")
     public String update(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/edit-user";
